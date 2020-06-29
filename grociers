@@ -1,0 +1,118 @@
+'''
+Author:kuncharam Priyanka
+Last Time changed: 29-06-2020
+'''
+
+import sys
+from datetime import datetime
+
+# Making Time stemped File name
+dateTimeObj = datetime.now()
+timestampStr = dateTimeObj.strftime("%d-%b-%Y_(%H-%M-%S)")
+write_to_text=open("CH_"+timestampStr+".txt","w+")
+write_to_text.write("Time: "+ timestampStr + " \n ")
+
+#Check if the Input is Integer or not 
+def Ask_Question(Question, C_input):
+    while (True):
+        try:
+            val = int(C_input)
+            break
+        except ValueError:
+            write_to_text.write(Question + " \n ")
+            print(Question)
+            C_input = input("Greet Customer: ")
+            write_to_text.write("Greet Customer: "+ C_input + " \n ")
+            continue
+    return val
+
+#Getting Information about the trucks and their models 
+def Truck_Information(Number):
+    write_to_text.write("Chatbot: Can i know the address "+Number+" to deliver the parcel?" + " \n ")
+    print("Chatbot: can i know the address "+Number+" to deliver the parcel?")
+    Brand_Name = input("Customer: ")
+    write_to_text.write("Customer: "+ Brand_Name + " \n ")
+
+    write_to_text.write("Chatbot: Can you please give your contact number Sir/Mam " + Brand_Name + "? (IN NUMBER)" + " \n ")
+    print("Chatbot: Can you please give your contact number Sir/Mam " + Brand_Name + "? (IN NUMBER)")
+    C_input = input("Customer: ")
+    write_to_text.write("Customer: " + C_input + " \n ")
+    Truck_Quantity = Ask_Question("Chatbot: Can you please give your contact number Sir/Mam" + Brand_Name + " (IN NUMBER only)", C_input)
+
+    write_to_text.write("Chatbot: Please give the Rating?[Good/Bad]" + " \n ")
+    print("Chatbot: Please give the Rating?[Good/Bad]")
+    C_input = input("Customer: ")
+    write_to_text.write("Customer: " + C_input + " \n ")
+
+    if ("no" in C_input):
+        j = 1
+        while (j <= Truck_Quantity):
+            if (j == 1):
+                write_to_text.write("Chatbot: What u like to have Sir/Mam?" + " \n ")
+                print("Chatbot: What u like to have Sir/Mam?")
+                C_input = input("Customer: ")
+                write_to_text.write("Customer: " + C_input + " \n ")
+            elif (j == 2):
+                write_to_text.write("Chatbot: Do you like to take any desert Sir/Mam?" + " \n ")
+                print("Chatbot: Do you like to take any desert Sir/Mam?")
+                C_input = input("Customer: ")
+                write_to_text.write("Customer: " + C_input + " \n ")
+            elif (j == 3):
+                write_to_text.write("Chatbot: Please give exit if you have completed?" + " \n ")
+                print("Chatbot: Please give exit if you have completed?")
+                C_input = input("Customer: ")
+                write_to_text.write("Customer: " + C_input + " \n ")
+            elif (i > 3):
+                write_to_text.write("Chatbot: what is the " + str(j) + "press exit" + " \n ")
+                print("Chatbot: what is the " + str(j) + "press exit")
+                C_input = input("Customer: ")
+                write_to_text.write("Customer: " + C_input + " \n ")
+            j = j + 1
+    else:
+        write_to_text.write("Chatbot: Do you like to take anything else Sir/Mam?" + " \n ")
+        print("Chatbot: Do you like to take anything else Sir/Mam?")
+        C_input = input("Customer: ")
+        write_to_text.write("Customer: " + C_input + " \n ")
+
+#Starting Point of the Program
+write_to_text.write("Chatbot: Hello, Please enter your mail " + " \n ")
+print("Chatbot: Hello, Please enter your mail")
+Customer_Name = input("Customer: ")
+write_to_text.write("Customer: " + Customer_Name + " \n ")
+
+write_to_text.write("Chatbot: Hi " + Customer_Name + " Which Dish u like to take Sir/Man?" + " \n ")
+print("Chatbot: Hi " + Customer_Name + " Which Dish u like to take Sir/Man?")
+C_input = input("Customer: ")
+write_to_text.write("Customer: " + C_input + " \n ")
+
+write_to_text.write("Chatbot: Can you please say me how much quantity?[Yes/No]" + " \n ")
+print("Chatbot: Can you please say me how much quantity?[Yes/No]")
+C_input = input("Customer: ")
+write_to_text.write("Customer: " + C_input + " \n ")
+if("no" in C_input.lower()):
+    write_to_text.write("Please contact to one of our Colleague For more information "+ " \n ")
+    print('Please contact to one of our colleague for more information ')
+    write_to_text.close()
+    sys.exit()
+
+write_to_text.write("Chatbot: Please can i know the quantity? (IN NUMBER)" + " \n ")
+print("Chatbot: Please can i know the quantity? (IN NUMBER)")
+C_input = input("Customer: ")
+write_to_text.write("Customer: " + C_input + " \n ")
+Brand_Quantity = Ask_Question("Chatbot: Please can i know the quantity? (IN NUMBER only)", C_input)
+
+i = 1
+while i <= Brand_Quantity:
+    if (i == 1):
+        Truck_Information("1st")
+    elif (i == 2):
+        Truck_Information("2nd")
+    elif (i == 3):
+        Truck_Information("3rd")
+    elif (i > 3):
+        Truck_Information(str(i)+"th")
+    i = i + 1
+
+print("Chatbot: Thank you very much for your information \n you order is under processing your information  \n Your Order has placed successfully \n Your order is on the way until the Order reach have a nice day Thnak you Good Bye:) ")
+write_to_text.write("Chatbot: Thank you very much for your information \n your order is under processing your information  \n Your Order has placed successfully \n Your order is on the way until the Order reach have a nice day Thnak you Good Bye:)  \n ")
+write_to_text.close()
